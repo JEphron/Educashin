@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Dashboard</h1>
+    <h3>Your Venmo name: {{ data.name }}</h3>
+    <h3>Khan Academy token: {{ data.khan_token }}</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <a class="btn btn-lg btn-danger" href="/link-khan">Link with Khan Academy</a>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form form-horizontal" action="/link-child-venmo" method="POST">
+                <input class="form-control" type="email" name="phone_num" placeholder="child's email" value="{{ data.child_venmo }}">
+                <input class="form-control" type="tel" name="venmo_id" placeholder="child's phone number" value="{{ data.child_phone }}">
+                <input type="submit" class="btn btn-lg btn-primary" value="Link child's Venmo account">
+            </form>
+        </div>
+    </div>
+{% endblock %}
