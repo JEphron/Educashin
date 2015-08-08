@@ -1,0 +1,120 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+html{
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+/* narrow devices */
+@media (max-width: 970px) {
+  .my_jumbo {
+    height:50%;
+    width:100%;
+  }
+
+  #student_jumbo {
+    border-top:4px solid #ffffff;
+    border-right:4px solid #ffffff;
+    border-left:4px solid #ffffff;
+    border-bottom:2px solid #ffffff;
+  }
+
+  #parent_jumbo {
+    border-top:2px solid #ffffff;
+    border-right:4px solid #ffffff;
+    border-left:4px solid #ffffff;
+    border-bottom:4px solid #ffffff;
+  }
+}
+
+/* wide devices */
+@media (min-width: 970px) {
+  .my_jumbo {
+    height:100%;
+    width:50%;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+  }
+
+  #student_jumbo {
+    border-top:4px solid #ffffff;
+    border-right:2px solid #ffffff;
+    border-left:4px solid #ffffff;
+    border-bottom:4px solid #ffffff;
+  }
+
+  #parent_jumbo {
+    border-top:4px solid #ffffff;
+    border-right:4px solid #ffffff;
+    border-left:2px solid #ffffff;
+    border-bottom:4px solid #ffffff;
+  }
+}
+
+
+
+
+
+#jumbo_container {
+  height:100vh;
+  margin-left:0;
+  margin-right:0;
+}
+
+.my_jumbo {
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#student_jumbo {
+  background-color: #454545;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/img1.jpg);
+}
+
+#student_jumbo:hover {
+  background-image: url(../img/img1.jpg);
+}
+
+#parent_jumbo {
+  background-color: #292929;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/img2.jpg);
+}
+
+#parent_jumbo:hover {
+  background-image: url(../img/img2.jpg);
+}
+
+.inside_jumbo {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align:center;
+}
+
+.inside_jumbo > h2 {
+  margin-top: 0;
+  color:#ffffff;
+}
+
+.inside_jumbo > p {
+  color:#cccccc;
+}
+
+.inside_jumbo > a {
+  margin-top: 0;
+  border: 1px solid white;
+  background-color: #cccccc;
+  background-image:url('');
+  border-radius: 0;
+}
