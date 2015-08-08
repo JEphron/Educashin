@@ -7,9 +7,21 @@
 html{
   height: 100%;
 }
+
 body {
   min-height: 100%;
   font-family: 'Roboto', sans-serif;
+}
+
+.btn.btn-primary {
+  margin-top: 0;
+  border: 2px solid #333333;
+  background-color: rgba(0, 0, 0, 0);
+  background-image:url('');
+  border-radius: 0;
+  color: #333333;
+  text-shadow: none;
+  box-shadow: none;
 }
 
 
@@ -108,13 +120,28 @@ body {
 }
 
 .inside_jumbo > p {
-  color:#cccccc;
+  color:#dddddd;
 }
 
 .inside_jumbo > a {
   margin-top: 0;
-  border: 1px solid white;
-  background-color: #cccccc;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 0);
   background-image:url('');
   border-radius: 0;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.inside_jumbo > a:hover, .inside_jumbo > a:visited {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+  color: #ffffff;
+}
+
+
+
+
+#login_jumbo {
+  background-color: #eeeeee;
 }
