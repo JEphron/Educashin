@@ -43,7 +43,7 @@ class Khan():
 
     completed_items = []
 
-    def poll(self, param):
+    def poll(self, session_data):
         resource_url = DEFAULT_API_RESOURCE
         future = '2016-08-09T00:00:00Z'
         # print now.isoformat() + 'Z'
@@ -66,4 +66,4 @@ class Khan():
             print diff
             if diff < timedelta(seconds=30):
                 self.completed_items.append(current_entry['video']['translated_youtube_id'])
-                self.poll_changed_callback(new_data[-1])
+                self.poll_changed_callback(new_data[-1], session_data)

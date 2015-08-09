@@ -11,12 +11,10 @@ from polling import poll_khan
 
 app = Flask(__name__)
 app.debug = True
-app.secret_key = VENMO_APP_SECRET  #
+app.secret_key = VENMO_APP_SECRET
 khan = khan_api.Khan()
 venmo_oauth_url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20' \
                   'access_profile%20access_email%20access_phone%20access_balance&response_type=code'
-
-
 
 # catch all
 @app.before_request
@@ -92,23 +90,26 @@ def link_khan():
 def khan_callback():
     session['khan'] = khan.finalize_auth(request)
 
-    def cb(data):
+    def cb(data, session_data):
         title = data['video']['translated_title']
         print title
         print "woot woot"
         twilio_sms.send_text('$10.00', title)
         pusher_api.push("You just finished watching %s" % (title,))
-        venmo_api.transfer(session['venmo']['oauth_token'], session['child_venmo'], 10.00,
+        venmo_api.transfer(session_data['venmo_oauth'], session_data['child_venmo_handle'], 10.00,
                            "Reward for watching %s" % (title,))
 
     khan.poll_changed_callback = cb
 
-    def run_poll(khan, key):
+    def run_poll(khan, data):
         with app.test_request_context():
-            res = khan.poll(key)
-            Timer(2, run_poll, [khan, key]).start()
+            res = khan.poll(data)
+            Timer(2, run_poll, [khan, data]).start()
 
-    run_poll(khan, session['khan']['oauth_token'])
+    run_poll(khan, {'ka_oauth': session['khan']['oauth_token'],
+                    'venmo_oauth': session['venmo']['oauth_token'],
+                    'child_venmo_handle': session['child_venmo']
+                    })
     return redirect(url_for('parent_dashboard'))
 
 
