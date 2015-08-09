@@ -1,5 +1,5 @@
 requirejs.config({
-	baseUrl: "js",
+	baseUrl: "../static/js",
 	paths: {
 		jquery: 'vendor/jquery-1.11.2.min',
 		bootstrap: 'vendor/bootstrap.min',

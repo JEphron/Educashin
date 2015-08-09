@@ -1,37 +1,256 @@
-{% extends "base.html" %}
-{% block content %}
-    <h1>Dashboard</h1>
-    <h3>Your Venmo name: {{ data.name }}</h3>
-    <h3>Khan Academy token: {{ data.khan_token }}</h3>
-    <h3>Parent's venmo token: {{ data.venmo_oauth }}</h3>
-    <div class="well">
-        <div class="row">
-            <div class="col-md-12">
-              {% if data.child_venmo and data.child_phone %}
-                  <p>Venmo id: {{ data.child_venmo }}</p>
-                  <p>Phone: {{ data.child_phone }}</p>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Parent Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-                  <a type="submit" class="btn btn-lg btn-primary disabled">Account linked</a>
-              {% else %}
-                  <form class="form form-horizontal" action="/link-child-venmo" method="POST">
-                      <input class="form-control" type="email" name="venmo_id" placeholder="child's email"
-                             value="{{ data.child_venmo }}">
-                      <input class="form-control" type="tel" name="phone_num" placeholder="child's phone number"
-                             value="{{ data.child_phone }}">
-                      <input type="submit" class="btn btn-lg btn-primary" value="Link child's Venmo account">
-                  </form>
-              {% endif %}
-            </div>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <style>
+        body {
+            padding-top: 80px;
+            padding-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
+</head>
+<body>
+<!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://getbootstrap.com/examples/navbar-fixed-top/#">Parent Dashboard</a>
         </div>
-        <br>
+        <div id="navbar" class="navbar-collapse collapse">
 
-        <div class="row">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#">Bobby</a></li>
+                <li><a href="#">Joseph</a></li>
+                <li><a href="#">Jerard</a></li>
+            </ul>
+
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="dash col-md-12">
+            <div class="container">
+                <div class="in_dash img-rounded col-md-6">
+
+                    <div class="row">
+                        <div class="khan_topic_dash col-sm-12">
+                            <h5 class="khan_topic">Calculus</h5>
+                        </div>
+                        <div class="khan_progress_dash col-sm-12">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width:30%"></div>
+                            </div>
+                        </div>
+
+                        <div class="khan_topic_dash col-sm-12">
+                            <h5 class="khan_topic">Linear Algebra</h5>
+                        </div>
+                        <div class="khan_progress_dash col-sm-12">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width:50%"></div>
+                            </div>
+                        </div>
+
+                        <div class="khan_topic_dash col-sm-12">
+                            <h5 class="khan_topic">Ordinary Differential Equations</h5>
+                        </div>
+                        <div class="khan_progress_dash col-sm-12">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width:50%"></div>
+                            </div>
+                        </div>
+
+                        <div class="khan_progress_dash col-sm-12">
+                            <form>
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topic
+                                            <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Math</a></li>
+                                            <li><a href="#">Physics</a></li>
+                                            <li><a href="#">Programming</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#">Advanced Topics</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control" aria-label="...">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modal_cash">
+                                +
+                            </button>
+                          </span>
+                                </div>
+                                <!-- /input-group -->
+                            </form>
+                        </div>
+
+                        <div class="col-md-12">
+                          {% if data.child_venmo and data.child_phone %}
+                              <p>Venmo id: {{ data.child_venmo }}</p>
+                              <p>Phone: {{ data.child_phone }}</p>
+
+                              <a type="submit" class="btn btn-lg btn-primary disabled">Account linked</a>
+                          {% else %}
+                              <form class="form form-horizontal" action="/link-child-venmo" method="POST">
+                                  <input class="form-control" type="email" name="venmo_id" placeholder="child's email"
+                                         value="{{ data.child_venmo }}">
+                                  <input class="form-control" type="tel" name="phone_num"
+                                         placeholder="child's phone number"
+                                         value="{{ data.child_phone }}">
+                                  <input type="submit" class="btn btn-lg btn-primary"
+                                         value="Link child's Venmo account">
+                              </form>
+                          {% endif %}
+                        </div>
+                            <div class="row">
             <div class="col-md-3">
                 <a class="btn btn-lg btn-danger" href="/link-khan">Link with Khan Academy</a>
             </div>
         </div>
+
+
+                    </div>
+
+                </div>
+                <div id="clndr_holder" class="in_dash img-rounded col-md-6">
+
+                    <div class="clndr-controls">
+                        <div class="clndr-previous-button">&lsaquo;</div>
+                        <div class="month"><%= month %></div>
+                        <div class="clndr-next-button">&rsaquo;</div>
+                    </div>
+                    <div class="clndr-grid">
+                        <div class="days-of-the-week">
+                            <% _.each(daysOfTheWeek, function(day) { %>
+                            <div class="header-day"><%= day %></div>
+                            <% }); %>
+                            <div class="days">
+                                <% _.each(days, function(day) { %>
+                                <div class="<%= day.classes %>"><%= day.day %></div>
+                                <% }); %>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="dash col-md-12">
+            <div class="container">
+
+                <div class="in_dash img-rounded col-md-12">
+                    <div id="highcharts_holder"></div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
+</div>
 
 
+<hr>
 
-{% endblock %}
+<footer>
+    <p></p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<div id="modal_cash" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cash per video</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+
+                        <div class="input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+
+                            <div class="input-group-addon">.00</div>
+                        </div>
+                    </div>
+                    <button id="modal_submit" type="submit" class="btn btn-primary">Promise money</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="pusher_overlay">
+    <p id="pusher_overlay_text">Write stuff in</p>
+
+    <p id="pusher_overlay_close">Close</p>
+</div>
+
+<script data-main="{{ url_for('static', filename='js/main') }}"
+        src="{{ url_for('static', filename='js/vendor/require.js') }}"></script>
+<script src="https://js.pusher.com/2.2/pusher.min.js"></script>
+<script>
+    /*Pusher.log = function(message) {
+     if (window.console && window.console.log) {
+     window.console.log(message);
+     }
+     };
+
+     var pusher = new Pusher('c9da65d5b2527ee603e9', {
+     encrypted: true
+     });
+
+     var channel = pusher.subscribe('test_channel');
+     channel.bind('my_event', function(data) {
+     alert(data.message);
+     });*/
+</script>
+
+</body>
+</html>

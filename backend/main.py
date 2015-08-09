@@ -1,5 +1,5 @@
 from threading import Timer
-from flask import Flask, request, session, render_template, jsonify, redirect, url_for
+from flask import Flask, request, session, render_template, jsonify, redirect, url_for, send_from_directory
 import rauth
 import requests
 from constants import *
@@ -9,25 +9,44 @@ import twilio_sms
 import pusher_api
 from polling import poll_khan
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.debug = True
 app.secret_key = VENMO_APP_SECRET
 khan = khan_api.Khan()
 venmo_oauth_url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20' \
                   'access_profile%20access_email%20access_phone%20access_balance&response_type=code'
 
+# static
+# @app.route('/img/<path:path>')
+# def send_img(path):
+#     return send_from_directory('img', path)
+#
+# @app.route('/fonts/<path:path>')
+# def send_fonts(path):
+#     return send_from_directory('fonts', path)
+#
+# @app.route('/css/<path:path>')
+# def send_css(path):
+#     return send_from_directory('css', path)
+#
+# @app.route('/js/<path:path>')
+# def send_js(path):
+#     return send_from_directory('js', path)
+
 # catch all
-@app.before_request
+# @app.before_request
 def catch_all():
     print request.endpoint
-    if 'venmo' not in session and request.endpoint != 'venmo_callback':
+    if 'venmo' not in session and request.endpoint != 'venmo_callback' and request.endpoint != 'index' and not 'static' in request.endpoint:
         return redirect(venmo_oauth_url)
 
 
 @app.route('/')
 @app.route('/index.html')
 def index():
-    return redirect(url_for('parent_dashboard'))
+    return render_template('index.html', data={
+        'sign_in':venmo_oauth_url
+    })
 
 
 @app.route('/venmo-callback')

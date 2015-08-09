@@ -13,5 +13,3 @@ def transfer(sender_token, receiver_email, amount, note):
     url = "%s/payments" % (VENMO_API_URL,)
     response = requests.post(url, data)
     return response
-
-
