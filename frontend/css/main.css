@@ -283,6 +283,10 @@ body {
 
 
 
+
+
+
+
 /* DASHBOARD stuff */
 
 .dash {
@@ -297,7 +301,7 @@ body {
 }
 
 .in_dash {
-  background-color: #aaaaaa;
+  background-color: #fafafa;
   padding:15px;
   margin:0;
   box-sizing:border-box;
@@ -324,5 +328,40 @@ body {
   text-align:center;
 }
 
-.khan_topic_dash {
+
+
+#modal_submit {
+  text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  float:right;
+}
+
+
+
+#pusher_overlay {
+  z-index:500;
+  position:fixed;
+  top:49px;
+  left:0;
+  width:100%;
+  background-color: #E33434;
+  padding:5px;
+}
+
+#pusher_overlay_text {
+  overflow: hidden;
+  color:white;
+  width:80%;
+  margin:0;
+  float:left;
+}
+
+#pusher_overlay_close {
+  float:right;
+  width:8%;
+  margin:0;
 }

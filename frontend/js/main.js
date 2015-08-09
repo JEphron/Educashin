@@ -99,6 +99,24 @@ require([
 
 
 
+			Pusher.log = function(message) {
+        if (window.console && window.console.log) {
+          window.console.log(message);
+        }
+      };
+
+      var pusher = new Pusher('c9da65d5b2527ee603e9', {
+        encrypted: true
+      });
+
+      var channel = pusher.subscribe('test_channel');
+      channel.bind('my_event', function(data) {
+        alert(data.message);
+      });
+
+
+
+
 			/*$('#top_container').vide({
 			  mp4: '../vid/vid1.mp4'
 			}, {
