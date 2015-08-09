@@ -45,7 +45,7 @@ def catch_all():
 @app.route('/index.html')
 def index():
     return render_template('index.html', data={
-        'sign_in':venmo_oauth_url
+        'sign_in': venmo_oauth_url
     })
 
 

@@ -46,8 +46,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#">Bobby</a></li>
-                <li><a href="#">Joseph</a></li>
-                <li><a href="#">Jerard</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
 
         </div>
@@ -67,34 +66,44 @@
                         </div>
                         <div class="khan_progress_dash col-sm-12">
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:30%"></div>
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                     style="width:30%"></div>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="khan_topic_dash col-sm-12">
                             <h5 class="khan_topic">Linear Algebra</h5>
                         </div>
                         <div class="khan_progress_dash col-sm-12">
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:50%"></div>
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                     style="width:50%"></div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="row">
                         <div class="khan_topic_dash col-sm-12">
                             <h5 class="khan_topic">Ordinary Differential Equations</h5>
                         </div>
+
                         <div class="khan_progress_dash col-sm-12">
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:50%"></div>
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                     style="width:50%"></div>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="khan_progress_dash col-sm-12">
                             <form>
                                 <div class="input-group">
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topic
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Math
                                             <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
                                             <li><a href="#">Math</a></li>
@@ -115,70 +124,122 @@
                                 <!-- /input-group -->
                             </form>
                         </div>
-
-                        <div class="col-md-12">
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
                           {% if data.child_venmo and data.child_phone %}
                               <p>Venmo id: {{ data.child_venmo }}</p>
                               <p>Phone: {{ data.child_phone }}</p>
 
-                              <a type="submit" class="btn btn-lg btn-primary disabled">Account linked</a>
-                          {% else %}
-                              <form class="form form-horizontal" action="/link-child-venmo" method="POST">
-                                  <input class="form-control" type="email" name="venmo_id" placeholder="child's email"
-                                         value="{{ data.child_venmo }}">
-                                  <input class="form-control" type="tel" name="phone_num"
-                                         placeholder="child's phone number"
-                                         value="{{ data.child_phone }}">
-                                  <input type="submit" class="btn btn-lg btn-primary"
-                                         value="Link child's Venmo account">
+                              <form class="form-horizontal">
+                                  <div class="form-group">
+                                      <div class="col-sm-offset-2 col-sm-10">
+                                            <a class="btn btn-info disabled"><i class="glyphicon glyphicon-link"></i> Venmo Linked</a>
+                                      </div>
+                                  </div>
                               </form>
+{#                              <a class="btn btn-lg btn-primary disabled"><i class="glyphicon glyphicon-link"></i>#}
+{#                                  Account linked</a>#}
+
+                          {% else %}
+                            {#                              <form class="form form-horizontal" action="/link-child-venmo" method="POST"> #}
+                            {#                                  <input class="form-control" type="email" name="venmo_id" #}
+                            {#                                         placeholder="child's email" #}
+                            {#                                         value="{{ data.child_venmo }}"> #}
+                            {#                                  <input class="form-control" type="tel" name="phone_num" #}
+                            {#                                         placeholder="child's phone number" #}
+                            {#                                         value="{{ data.child_phone }}"> #}
+                            {#                                  <input type="submit" class="btn btn-lg btn-info btn-block" #}
+                            {#                                         value="Link child's Venmo account"> #}
+                            {#                              </form> #}
+
+                              <form class="form-horizontal" action="/link-child-venmo" method="POST">
+                                  <div class="form-group">
+                                      <label for="venmo_id" class="col-sm-2 control-label">Email</label>
+
+                                      <div class="col-sm-10">
+                                          <input type="email" class="form-control" id="venmo_id" name="venmo_id"
+                                                 placeholder="blah@gmail.com" value="{{ data.child_venmo }}">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="inputPassword3" class="col-sm-2 control-label">Telephone</label>
+
+                                      <div class="col-sm-10">
+                                          <input type="tel" class="form-control" name="phone_num"
+                                                 placeholder="Child's Telephone" value="{{ data.child_phone }}">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="col-sm-offset-2 col-sm-10">
+                                          <button type="submit" class="btn btn-info">Link child's Venmo account</button>
+                                      </div>
+                                  </div>
+                              </form>
+
                           {% endif %}
                         </div>
-                            <div class="row">
-            <div class="col-md-3">
-                <a class="btn btn-lg btn-danger" href="/link-khan">Link with Khan Academy</a>
-            </div>
-        </div>
-
-
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      {% if data.khan_token == '' %}
+                                          <a class="btn btn-success" href="/link-khan">Link with Khan Academy</a>
+                                      {% else %}
+                                          <a class="btn btn-success disabled"><i class="glyphicon glyphicon-link"></i>
+                                              Khan Academy linked</a>
+                                      {% endif %}
+                                    </div>
+                                </div>
+                            </form>
 
-                </div>
-                <div id="clndr_holder" class="in_dash img-rounded col-md-6">
-
-                    <div class="clndr-controls">
-                        <div class="clndr-previous-button">&lsaquo;</div>
-                        <div class="month"><%= month %></div>
-                        <div class="clndr-next-button">&rsaquo;</div>
-                    </div>
-                    <div class="clndr-grid">
-                        <div class="days-of-the-week">
-                            <% _.each(daysOfTheWeek, function(day) { %>
-                            <div class="header-day"><%= day %></div>
-                            <% }); %>
-                            <div class="days">
-                                <% _.each(days, function(day) { %>
-                                <div class="<%= day.classes %>"><%= day.day %></div>
-                                <% }); %>
-                            </div>
                         </div>
                     </div>
 
                 </div>
-            </div>
-        </div>
+                <div class="col-md-5">
+                    <div id="clndr_holder" class="in_dash img-rounded">
 
-        <div class="dash col-md-12">
-            <div class="container">
+                        <div class="clndr-controls">
+                            <div class="clndr-previous-button">&lsaquo;</div>
+                            <div class="month"><%= month %></div>
+                            <div class="clndr-next-button">&rsaquo;</div>
+                        </div>
+                        <div class="clndr-grid">
+                            <div class="days-of-the-week">
+                                <% _.each(daysOfTheWeek, function(day) { %>
+                                <div class="header-day"><%= day %></div>
+                                <% }); %>
+                                <div class="days">
+                                    <% _.each(days, function(day) { %>
+                                    <div class="<%= day.classes %>"><%= day.day %></div>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="in_dash img-rounded col-md-12">
-                    <div id="highcharts_holder"></div>
+                    </div>
                 </div>
 
             </div>
         </div>
-
     </div>
+
+    <div class="dash col-md-12">
+        <div class="container">
+
+            <div class="in_dash img-rounded col-md-12">
+                <div id="highcharts_holder"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 </div>
 
 
@@ -225,12 +286,6 @@
     </div>
 </div>
 
-
-<div id="pusher_overlay">
-    <p id="pusher_overlay_text">Write stuff in</p>
-
-    <p id="pusher_overlay_close">Close</p>
-</div>
 
 <script data-main="{{ url_for('static', filename='js/main') }}"
         src="{{ url_for('static', filename='js/vendor/require.js') }}"></script>
