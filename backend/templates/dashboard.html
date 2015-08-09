@@ -12,11 +12,20 @@
 
     <div class="row">
         <div class="col-md-12">
-            <form class="form form-horizontal" action="/link-child-venmo" method="POST">
-                <input class="form-control" type="email" name="phone_num" placeholder="child's email" value="{{ data.child_venmo }}">
-                <input class="form-control" type="tel" name="venmo_id" placeholder="child's phone number" value="{{ data.child_phone }}">
-                <input type="submit" class="btn btn-lg btn-primary" value="Link child's Venmo account">
-            </form>
+          {% if data.child_venmo and data.child_phone %}
+              <p>Venmo id: {{ data.child_venmo }}</p>
+              <p>Phone: {{ data.child_phone }}</p>
+
+              <a type="submit" class="btn btn-lg btn-primary disabled">Account linked</a>
+          {% else %}
+              <form class="form form-horizontal" action="/link-child-venmo" method="POST">
+                  <input class="form-control" type="email" name="venmo_id" placeholder="child's email"
+                         value="{{ data.child_venmo }}">
+                  <input class="form-control" type="tel" name="phone_num" placeholder="child's phone number"
+                         value="{{ data.child_phone }}">
+                  <input type="submit" class="btn btn-lg btn-primary" value="Link child's Venmo account">
+              </form>
+          {% endif %}
         </div>
     </div>
 {% endblock %}

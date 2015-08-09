@@ -2,26 +2,23 @@ from flask import Flask, request, session, render_template, jsonify, redirect, u
 import rauth
 import requests
 from constants import *
-import threading
-"""
-This file contains all the functions and routes for our demo app.
-"""
-app = Flask(__name__)
-# comment out when you're done testing
-app.debug = True
-app.secret_key = VENMO_APP_SECRET  # a secret string that will sign your session cookies
+from twilio_sms import send_text
 
+app = Flask(__name__)
+app.debug = True
+app.secret_key = VENMO_APP_SECRET
+venmo_oauth_url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code'
 # catch all
-@app.before_request
-def catch_all():
-    if 'venmo' not in session:
-        return redirect(url_for('index'))
+# @app.before_request
+# def catch_all():
+#     pass
 
 @app.route('/')
 @app.route('/index.html')
 def index():
-    url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code'
-    return redirect(url)
+    if 'venmo' not in session:
+        return redirect(venmo_oauth_url)
+    return redirect(url_for('dashboard'))
 
 
 @app.route('/venmo-callback')
@@ -47,6 +44,9 @@ def oauth_authorized():
 
 @app.route('/dashboard')
 def dashboard():
+    if 'venmo' not in session:
+        return redirect(venmo_oauth_url)
+
     print session.get('child_venmo', '')
     data = {'name': session['venmo']['username'],
             'khan_token': session.get('khan', {}).get('oauth_token', ""),
@@ -63,6 +63,13 @@ def dashboard():
 def poll_khan():
     token = session.get('khan', {}).get('oauth_token')
 
+@app.route('/payout-trigger')
+def payout_trigger():
+
+    # do the venmo thing
+    venmo_transfer()
+    # send the text
+
 
 @app.route('/link-khan')
 def link_khan():
@@ -76,16 +83,12 @@ def link_khan():
         base_url=KHAN_SERVER_URL + '/api/auth2')
 
     cb_url = 'http://%s:%d%s' % (CALLBACK_BASE, 5000, url_for('khan_callback'))
-    print cb_url
 
     request_token, secret_request_token = service.get_request_token(
         params={'oauth_callback': cb_url})
-    print session['venmo']
+
     authorize_url = service.get_authorize_url(request_token)
 
-    # spawn off a polling thread
-    def poll():
-        threading.Timer(2, poll).start()
     return redirect(authorize_url)
 
 
