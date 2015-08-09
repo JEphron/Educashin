@@ -72,16 +72,57 @@
             <div class="dash col-md-12">
               <div class="container">
                 <div class="in_dash col-md-6">
+
                   <div class="khan_subject">
-                    <div class="khan_topic_dash col-sx-2">
+                    <div class="khan_topic_dash col-sm-12">
                       <h5 class="khan_topic">Calculus</h5>
                     </div>
-                    <div class="khan_progress_dash col-sx-10">
+                    <div class="khan_progress_dash col-sm-12">
                       <div class="progress"><div class="progress-bar" role="progressbar" style="width:30%"></div></div>
                     </div>
                   </div>
+
+                  <div class="khan_subject">
+                    <div class="khan_topic_dash col-sm-12">
+                      <h5 class="khan_topic">Linear Algebra</h5>
+                    </div>
+                    <div class="khan_progress_dash col-sm-12">
+                      <div class="progress"><div class="progress-bar" role="progressbar" style="width:50%"></div></div>
+                    </div>
+                  </div>
+
+                  <div class="khan_subject">
+                    <div class="khan_topic_dash col-sm-12">
+                      <h5 class="khan_topic">Ordinary Differential Equations</h5>
+                    </div>
+                    <div class="khan_progress_dash col-sm-12">
+                      <div class="progress"><div class="progress-bar" role="progressbar" style="width:50%"></div></div>
+                    </div>
+                  </div>
+
+                  <div class="khan_progress_dash col-sm-12">
+                    <form>
+                      <div class="input-group">
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topic <span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Math</a></li>
+                            <li><a href="#">Physics</a></li>
+                            <li><a href="#">Programming</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Advanced Topics</a></li>
+                          </ul>
+                        </div><!-- /btn-group -->
+                        <input type="text" class="form-control" aria-label="...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modal_cash">+</button>
+                        </span>
+                      </div><!-- /input-group -->
+                    </form>
+                  </div>
+
                 </div>
-                <div id="clndr_hold" class="in_dash col-md-6">
+                <div id="clndr_holder" class="in_dash col-md-6">
 
                   <div class="clndr-controls">
                     <div class="clndr-previous-button">&lsaquo;</div>
@@ -104,8 +145,15 @@
                 </div>
               </div>
             </div>
-            <div class="dash col-md-4"></div>
-            <div class="dash col-md-4"></div>
+            <div class="dash col-md-12">
+              <div class="container">
+                <div class="in_dash col-md-6">
+                </div>
+                <div class="in_dash col-md-6">
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -117,6 +165,43 @@
       </footer>
 
     </div> <!-- /container -->
+
+
+    <div id="modal_cash" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Cash per video</h4>
+          </div>
+          <div class="modal-body">
+
+            <form class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                  <div class="input-group-addon">$</div>
+                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                  <div class="input-group-addon">.00</div>
+                </div>
+              </div>
+              <button id="modal_submit" type="submit" class="btn btn-primary">Promise money</button>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
 
     <script data-main="js/main" src="js/vendor/require.js"></script>
     <script src="https://js.pusher.com/2.2/pusher.min.js"></script>

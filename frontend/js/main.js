@@ -23,7 +23,7 @@ require([
 
 	$( document ).ready(function() {
 
-			$('#clndr_hold').clndr();
+			$('#clndr_holder').clndr();
 
 
 	});
