@@ -394,3 +394,23 @@ body {
   background-color: white;
   padding: 0 15px;
 }
+
+
+
+.charity_box {
+  height:100px;
+}
+
+.charity_text {
+  margin-left:20px;
+  float:right;
+}
+
+#selected_charity {
+    background-color: #76B378;
+}
+
+.charity_img {
+  float:left;
+  width:90px;
+}

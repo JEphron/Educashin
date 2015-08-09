@@ -134,12 +134,9 @@ require([
 
     });
 
-    $('body').on('click', '#action_list_all_items', function () {
+    $('.charity_text').on('click', function () {
 
-        views.place_loading_gif();
-
-        //get_items.all_data('item_name').then(function(data){
-        //});
+        $('.charity_text').attr('id', 'selected_charity');
 
     });
 
