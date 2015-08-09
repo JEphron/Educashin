@@ -150,11 +150,7 @@ require([
 
     });
 
-    $('.charity_text').on('click', function () {
 
-        $('.charity_text').attr('id', 'selected_charity');
-
-    });
 
 
 });
