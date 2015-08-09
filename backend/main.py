@@ -86,6 +86,22 @@ def parent_dashboard():
 
     return render_template('dashboard.html', data=data)
 
+@app.route('/child/dashboard')
+def child_dashboard():
+    if 'venmo' not in session:
+        return redirect(venmo_oauth_url)
+
+    data = {'name': session['venmo']['username'],
+            'venmo_oauth': session.get('venmo', {}).get('oauth_token', ""),
+            'khan_token': session.get('khan', {}).get('oauth_token', ""),
+            'child_phone': session.get('child_phone', ''),
+            'child_venmo': session.get('child_venmo', ''),
+            'consumer_id': VENMO_CONSUMER_ID,
+            'access_token': session['venmo']['oauth_token'],
+            'signed_in': True}
+
+    return render_template('child_dashboard.html', data=data)
+
 
 @app.route('/poll-khan')
 def poll_khan():
