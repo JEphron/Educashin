@@ -5,7 +5,8 @@ import requests
 from constants import *
 import khan_api
 import venmo_api
-from twilio_sms import send_text
+import twilio_sms
+import pusher_api
 from polling import poll_khan
 
 app = Flask(__name__)
@@ -92,15 +93,22 @@ def khan_callback():
     session['khan'] = khan.finalize_auth(request)
 
     def cb(data):
-        print data
+        title = data['video']['translated_title']
+        print title
+        print "woot woot"
+        twilio_sms.send_text('$10.00', title)
+        pusher_api.push("You just finished watching %s" % (title,))
+        venmo_api.transfer(session['venmo']['oauth_token'], session['child_venmo'], 10.00,
+                           "Reward for watching %s" % (title,))
 
     khan.poll_changed_callback = cb
 
-    def run_poll():
-        res = khan.poll(session['khan']['oauth_token'])
-        Timer(2, run_poll).start()
+    def run_poll(khan, key):
+        with app.test_request_context():
+            res = khan.poll(key)
+            Timer(2, run_poll, [khan, key]).start()
 
-    run_poll()
+    run_poll(khan, session['khan']['oauth_token'])
     return redirect(url_for('parent_dashboard'))
 
 

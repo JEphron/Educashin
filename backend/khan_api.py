@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import json
 import rauth
 from constants import *
+import dateutil.parser
 
 DEFAULT_API_RESOURCE = '/api/v1/user/videos'
 
@@ -40,17 +41,29 @@ class Khan():
             'oauth_token': request.args.get('oauth_token', "")
         }
 
+    completed_items = []
+
     def poll(self, param):
         resource_url = DEFAULT_API_RESOURCE
-        now = datetime.now()
-        print now.isoformat() + 'Z'
-        prev = '2011-08-08T22:46:24Z'
-        params = {'dt_start': prev, 'dt_end': now.isoformat() + 'Z', 'username': 'JEphron63'}
+        future = '2016-08-09T00:00:00Z'
+        # print now.isoformat() + 'Z'
+        start = datetime.utcnow() - timedelta(minutes=1)
+        params = {'dt_start': start.isoformat() + 'Z', 'dt_end': future, 'username': 'JEphron63'}
         response = self.session.get(KHAN_SERVER_URL + resource_url, params=params)
         new_data = json.JSONDecoder().decode(response.text)
-        shared_items = set(new_data.items()) & set(self.data.items())
-        print len(shared_items)
-        if len(new_data) > len(self.data):
-            self.poll_changed_callback()
-            self.data = new_data
-        return self.data
+        # shared_items = set(new_data.items()) & set(self.data.items())
+        # print len(shared_items)
+        if len(new_data) is 0:
+            return
+
+        new_data.sort(key=lambda k: k['backup_timestamp'])
+
+        current_entry = new_data[-1]
+        # print current_entry
+        print current_entry['completed'], current_entry['video']['relative_url']
+        if current_entry['completed'] and not current_entry['video']['translated_youtube_id'] in self.completed_items:
+            diff = datetime.utcnow() - dateutil.parser.parse(current_entry['backup_timestamp']).replace(tzinfo=None)
+            print diff
+            if diff < timedelta(seconds=30):
+                self.completed_items.append(current_entry['video']['translated_youtube_id'])
+                self.poll_changed_callback(new_data[-1])
