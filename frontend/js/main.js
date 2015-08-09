@@ -3,20 +3,30 @@ requirejs.config({
 	paths: {
 		jquery: 'vendor/jquery-1.11.2.min',
 		bootstrap: 'vendor/bootstrap.min',
-		npm: 'vendor/npm'
+		npm: 'vendor/npm',
+		clndr: 'vendor/clndr.min',
+		underscore: 'vendor/underscore-min',
+		moment: 'vendor/moment.min'
 	}
 });
 
 require([
 		'jquery',
 		'views',
-		'visuals'
+		'visuals',
+		'clndr',
+		'underscore'
 	], function(
-		$,
-		views
+		$
 	){
 
 
+	$( document ).ready(function() {
+
+			$('#clndr_hold').clndr();
+
+
+	});
 
 	$('body').on('click', '#action_list_all_items', function() {
 

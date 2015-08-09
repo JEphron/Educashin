@@ -29,7 +29,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -69,7 +69,41 @@
 
         <div class="container">
           <div class="row">
-            <div class="dash col-md-4"></div>
+            <div class="dash col-md-12">
+              <div class="container">
+                <div class="in_dash col-md-6">
+                  <div class="khan_subject">
+                    <div class="khan_topic_dash col-sx-2">
+                      <h5 class="khan_topic">Calculus</h5>
+                    </div>
+                    <div class="khan_progress_dash col-sx-10">
+                      <div class="progress"><div class="progress-bar" role="progressbar" style="width:30%"></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div id="clndr_hold" class="in_dash col-md-6">
+
+                  <div class="clndr-controls">
+                    <div class="clndr-previous-button">&lsaquo;</div>
+                    <div class="month"><%= month %></div>
+                    <div class="clndr-next-button">&rsaquo;</div>
+                  </div>
+                  <div class="clndr-grid">
+                    <div class="days-of-the-week">
+                      <% _.each(daysOfTheWeek, function(day) { %>
+                        <div class="header-day"><%= day %></div>
+                      <% }); %>
+                      <div class="days">
+                        <% _.each(days, function(day) { %>
+                          <div class="<%= day.classes %>"><%= day.day %></div>
+                        <% }); %>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
             <div class="dash col-md-4"></div>
             <div class="dash col-md-4"></div>
           </div>
@@ -83,7 +117,24 @@
       </footer>
 
     </div> <!-- /container -->
-  <script data-main="js/main" src="js/vendor/require.js"></script>
+
+    <script data-main="js/main" src="js/vendor/require.js"></script>
+    <script src="https://js.pusher.com/2.2/pusher.min.js"></script>
+    <script>
+      Pusher.log = function(message) {
+        if (window.console && window.console.log) {
+          window.console.log(message);
+        }
+      };
+
+      var pusher = new Pusher('c9da65d5b2527ee603e9', {
+        encrypted: true
+      });
+      var channel = pusher.subscribe('test_channel');
+      channel.bind('my_event', function(data) {
+        alert(data.message);
+      });
+    </script>
 
   </body>
 </html>
