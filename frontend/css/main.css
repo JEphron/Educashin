@@ -45,6 +45,14 @@ body {
     border-left:4px solid #ffffff;
     border-bottom:4px solid #ffffff;
   }
+
+  #svg_logo {
+    width:110px;
+    top:10px;
+    left:10px;
+    position:absolute;
+  }
+
 }
 
 /* wide devices */
@@ -70,9 +78,131 @@ body {
     border-left:2px solid #ffffff;
     border-bottom:4px solid #ffffff;
   }
+
+  #svg_logo {
+    width:180px;
+    top:25px;
+    left:25px;
+    position:absolute;
+    fill:#ffffff;
+  }
+
 }
 
 
+
+
+#top_container {
+  height:100vh;
+  margin-left:0;
+  margin-right:0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), url(../img/shattered.png);
+  background-color: #ffffff;
+  background-repeat:repeat;
+  background-attachment: fixed;
+  background-position: center;
+  border-top:4px solid #ffffff;
+  border-right:4px solid #ffffff;
+  border-left:4px solid #ffffff;
+  border-bottom:2px solid #ffffff;
+}
+
+#titles_holder {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#first_lesson {
+  height:100vh;
+  margin-left:0;
+  margin-right:0;
+  background-color: #B8CFA5;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  border-top:2px solid #ffffff;
+  border-right:4px solid #ffffff;
+  border-left:4px solid #ffffff;
+  border-bottom:2px solid #ffffff;
+}
+
+#leaf_pic {
+  margin-top:25px;
+  width:100%;
+  margin-bottom:25px;
+  padding-left:20px;
+}
+
+#charity_pic {
+  margin-top:25px;
+  width:100%;
+  margin-bottom:25px;
+}
+
+#responsibility_pic {
+  margin-top:25px;
+  width:100%;
+  margin-bottom:25px;
+}
+
+.lesson_text {
+  margin-top:45px;
+  font-size:35px;
+}
+
+#second_lesson {
+  height:100vh;
+  margin-left:0;
+  margin-right:0;
+  background-color: #C8C9E8;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  border-top:2px solid #ffffff;
+  border-right:4px solid #ffffff;
+  border-left:4px solid #ffffff;
+  border-bottom:2px solid #ffffff;
+}
+
+#third_lesson {
+  height:100vh;
+  margin-left:0;
+  margin-right:0;
+  background-color: #999390;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  border-top:2px solid #ffffff;
+  border-right:4px solid #ffffff;
+  border-left:4px solid #ffffff;
+  border-bottom:0px solid #ffffff;
+}
+
+
+#subtext_logo {
+  margin:15px 0px 45px 20px;
+  margin-top:15px;
+  color:#000000;
+  margin-bottom:45px;
+}
+
+.buttons_logo {
+  display:inline-block;
+  clear_both;
+  font-size: 20px;
+  margin-bottom:30px;
+  margin-right:0;
+}
+
+.subtext_logo_div {
+  text-align: center;
+  padding:0;
+}
+
+.buttons_logo_div {
+  text-align: center;
+}
 
 
 

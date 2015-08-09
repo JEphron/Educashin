@@ -7,7 +7,8 @@ requirejs.config({
 		clndr: 'vendor/clndr.min',
 		underscore: 'vendor/underscore-min',
 		moment: 'vendor/moment.min',
-		highcharts: 'vendor/highcharts'
+		highcharts: 'vendor/highcharts',
+		vide: 'vendor/vide.min'
 	}
 });
 
@@ -17,7 +18,8 @@ require([
 		'visuals',
 		'clndr',
 		'underscore',
-		'highcharts'
+		'highcharts',
+		'vide'
 	], function(
 		$
 	){
@@ -94,6 +96,23 @@ require([
 	            data: [1052, 954, 4250, 740, 38]
 	        }]
 	    });
+
+
+
+			/*$('#top_container').vide({
+			  mp4: '../vid/vid1.mp4'
+			}, {
+				volume: 1,
+			  playbackRate: 1,
+			  muted: true,
+			  loop: true,
+			  autoplay: true,
+			  position: '50% 50%', // Similar to the CSS `background-position` property.
+			  posterType: 'detect', // Poster image type. "detect" — auto-detection; "none" — no poster; "jpg", "png", "gif",... - extensions.
+			  resizing: true // Auto-resizing, read: https://github.com/VodkaBears/Vide#resizing
+			});
+			$('#myBlock').vide('extended path as a string', 'options as a string');*/
+
 
 
 
