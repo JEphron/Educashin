@@ -19,6 +19,18 @@
             padding-top: 80px;
             padding-bottom: 20px;
         }
+
+        table {
+            width: 100%
+        }
+
+        tr {
+            height: 145px;
+        }
+
+        td {
+            text-align: center;
+        }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
@@ -58,142 +70,163 @@
 <div class="container">
     <div class="row">
 
-      <div class="child_dash col-sx-12">
+        <div class="child_dash col-sx-12">
 
-        <div class="row">
-            <div class="total_label col-sm-12">
-              <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modal_charity">
-                Choose Charity
-              </button>
-            </div>
-        </div>
-
-      </div>
-
-      <hr>
-
-      <div class="child_dash col-sx-12">
-
-        <div class="row">
-            <div class="total_label col-sm-12">
-                <h5 class="total_topic">Total money to target of <strong>$399</strong></h5>
-            </div>
-            <div class="total_progress_dash col-sm-12">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-                         style="width:30%"></div>
+            <div class="row">
+                <div class="total_label col-sm-12">
+                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal"
+                            data-target="#modal_charity">
+                        Choose Charity
+                    </button>
                 </div>
             </div>
-        </div>
 
-      </div>
-
-      <hr>
-
-      <div class="child_dash col-sx-12">
-
-        <div class="row">
-            <div class="khan_topic_dash col-sm-12">
-                <h5 class="khan_topic">Calculus</h5>
-            </div>
-            <div class="khan_progress_dash col-sm-12">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar"
-                         style="width:30%"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="khan_topic_dash col-sm-12">
-                <h5 class="khan_topic">Linear Algebra</h5>
-            </div>
-            <div class="khan_progress_dash col-sm-12">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar"
-                         style="width:50%"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="khan_topic_dash col-sm-12">
-                <h5 class="khan_topic">Ordinary Differential Equations</h5>
-            </div>
-
-            <div class="khan_progress_dash col-sm-12">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar"
-                         style="width:50%"></div>
-                </div>
-            </div>
         </div>
 
         <hr>
 
-        <div class="row">
-
-          <div class="child_dash col-sx-12">
+        <div class="child_dash col-sx-12">
 
             <div class="row">
                 <div class="total_label col-sm-12">
-                  <a href="/success" class="btn btn-default" type="button">Finalize Payment</a>
+                    <h5 class="total_topic">Total money to target of <strong>$399</strong></h5>
+                </div>
+                <div class="total_progress_dash col-sm-12">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                             style="width:30%"></div>
+                    </div>
                 </div>
             </div>
 
-          </div>
+        </div>
 
-      </div>
+        <hr>
+
+        <div class="child_dash col-sx-12">
+
+            <div class="row">
+                <div class="khan_topic_dash col-sm-12">
+                    <h5 class="khan_topic">Calculus</h5>
+                </div>
+                <div class="khan_progress_dash col-sm-12">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped" role="progressbar"
+                             style="width:30%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="khan_topic_dash col-sm-12">
+                    <h5 class="khan_topic">Linear Algebra</h5>
+                </div>
+                <div class="khan_progress_dash col-sm-12">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped" role="progressbar"
+                             style="width:50%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="khan_topic_dash col-sm-12">
+                    <h5 class="khan_topic">Ordinary Differential Equations</h5>
+                </div>
+
+                <div class="khan_progress_dash col-sm-12">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped" role="progressbar"
+                             style="width:50%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="child_dash col-sx-12">
+
+                    <div class="row">
+                        <div class="total_label col-sm-12">
+                            <a href="/success" class="btn btn-default" type="button">Finalize Payment</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
 
-
-
-
-
-
-
-
-
-
-
+        </div>
     </div>
+
+
+    <hr>
+
+    <footer>
+        <p></p>
+    </footer>
+
 </div>
-
-
-<hr>
-
-<footer>
-    <p></p>
-</footer>
-
-</div> <!-- /container -->
+<!-- /container -->
 
 
 <div class="modal fade" id="modal_charity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Choose Charity</h4>
-      </div>
-      <div class="modal-body">
-          <div class="charity_box">
-            <img class="charity_img" src="{{url_for('static',filename="img/foodbank.gif")}}">
-            <a href="/success" type="button" class="charity_text btn btn-default"><h2>Foodbank NYC</h1></a>
-          </div>
-          <div class="charity_box">
-            <img class="charity_img" src="{{url_for('static',filename="img/redcross.png")}}">
-            <a href="/success" type="button" class="charity_text btn btn-default"><h2>Red Cross</h1></a>
-          </div>
-          <div class="charity_box">
-            <img class="charity_img" src="{{url_for('static',filename="img/student_sponsor.jpg")}}">
-            <a href="/success" type="button" class="charity_text btn btn-default"><h2>Student Sponsor</h1></a>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Choose Charity</h4>
+            </div>
+            <div class="modal-body">
+                <table>
+
+                    <tr>
+                        <td>
+                            <img class="charity_img" src="{{ url_for('static',filename="img/foodbank.gif") }}">
+                        </td>
+                        <td>
+                            <h2>Foodbank NYC</h1>
+                        </td>
+                        <td>
+                            <a href="/success" type="button" class="charity_text btn btn-default btn-block"><h2>
+                                Donate</h1>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img class="charity_img" src="{{ url_for('static',filename="img/redcross.png") }}">
+                        </td>
+                        <td>
+                            <h2>Red Cross</h1>
+                        </td>
+                        <td>
+                            <a href="/success" type="button" class="charity_text btn btn-default btn-block"><h2>
+                                Donate</h1></a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img class="charity_img" src="{{ url_for('static',filename="img/student_sponsor.jpg") }}">
+                        </td>
+                        <td>
+                            <h2>Foodbank NYC</h1>
+                        </td>
+                        <td><a href="/success" type="button" class="charity_text btn btn-default btn-block"><h2>Donate</h1></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 

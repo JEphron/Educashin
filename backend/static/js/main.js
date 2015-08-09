@@ -118,12 +118,12 @@ require([
             else {
 
                 var notification = new Notification('Congratz!', {
-                    icon: 'localhost:5000/static/img/logo.png',
+                    icon: '/static/img/logo.png',
                     body: data.message,
                 });
 
                 notification.onclick = function () {
-                    window.open('localhost:5000/child/dashboard/');
+                    window.open('localhost:5000/child/dashboard');
                 };
             }
             a = '<div class="alert alert-warning alert-dismissible" role="alert">' +
