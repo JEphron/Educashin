@@ -24,6 +24,9 @@ require([
 
 
     $(document).ready(function () {
+        if (Notification.permission !== "granted")
+            Notification.requestPermission();
+
         $('#clndr_holder').clndr({
             events: [
                 {
@@ -110,9 +113,22 @@ require([
 
         var channel = pusher.subscribe('test_channel');
         channel.bind('my_event', function (data) {
+            if (Notification.permission !== "granted")
+                Notification.requestPermission();
+            else {
+
+                var notification = new Notification('Congratz!', {
+                    icon: 'localhost:5000/static/img/logo.png',
+                    body: data.message,
+                });
+
+                notification.onclick = function () {
+                    window.open('localhost:5000/child/dashboard/');
+                };
+            }
             a = '<div class="alert alert-warning alert-dismissible" role="alert">' +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-            '<strong>Alert!</strong> ' + data.message + '</div>';
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                '<strong>Alert!</strong> ' + data.message + '</div>';
             $("body").prepend($(a))
         });
 

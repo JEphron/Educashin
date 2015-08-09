@@ -114,7 +114,8 @@
                                         </ul>
                                     </div>
                                     <!-- /btn-group -->
-                                    <input type="text" class="form-control" aria-label="...">
+
+                                    <input type="text" class="form-control" aria-label="..." value="10.00">
                           <span class="input-group-btn">
                             <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modal_cash">
                                 +
@@ -135,12 +136,13 @@
                               <form class="form-horizontal">
                                   <div class="form-group">
                                       <div class="col-sm-offset-2 col-sm-10">
-                                            <a class="btn btn-info disabled"><i class="glyphicon glyphicon-link"></i> Venmo Linked</a>
+                                          <a class="btn btn-info disabled"><i class="glyphicon glyphicon-link"></i>
+                                              Venmo Linked</a>
                                       </div>
                                   </div>
                               </form>
-{#                              <a class="btn btn-lg btn-primary disabled"><i class="glyphicon glyphicon-link"></i>#}
-{#                                  Account linked</a>#}
+                            {#                              <a class="btn btn-lg btn-primary disabled"><i class="glyphicon glyphicon-link"></i>#}
+                            {#                                  Account linked</a>#}
 
                           {% else %}
                             {#                              <form class="form form-horizontal" action="/link-child-venmo" method="POST"> #}
@@ -192,6 +194,8 @@
                                       {% else %}
                                           <a class="btn btn-success disabled"><i class="glyphicon glyphicon-link"></i>
                                               Khan Academy linked</a>
+                                          <a class="btn btn-success" href="http://www.khanacademy.com/"><i class=""></i>
+                                              Visit Khan Academy</a>
                                       {% endif %}
                                     </div>
                                 </div>

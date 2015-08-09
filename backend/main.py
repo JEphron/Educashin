@@ -86,6 +86,7 @@ def parent_dashboard():
 
     return render_template('dashboard.html', data=data)
 
+
 @app.route('/child/dashboard')
 def child_dashboard():
     if 'venmo' not in session:
@@ -108,6 +109,10 @@ def poll_khan():
     token = session.get('khan', {}).get('oauth_token')
 
 
+@app.route('/success')
+def success_url():
+    return render_template('final_page.html')
+
 @app.route('/payout-trigger')
 def payout_trigger():
     # do the venmo thing
@@ -117,6 +122,9 @@ def payout_trigger():
 
 @app.route('/link-khan')
 def link_khan():
+    session['child_phone'] = session.get('child_phone', '6466677202')
+    session['child_venmo'] = session.get('child_venmo', 'nadrojj@mac.com')
+
     authorize_url = khan.start_auth(url_for('khan_callback'))
     return redirect(authorize_url)  # takes you out of the site. Will return in khan_callback
 
