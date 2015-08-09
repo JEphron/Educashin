@@ -85,6 +85,7 @@ body {
 .my_jumbo {
   background-position: center;
   background-repeat: no-repeat;
+  background-size:cover
 }
 
 #student_jumbo {
@@ -155,7 +156,7 @@ body {
 /* DASHBOARD stuff */
 
 .dash {
-  background-color: #cccccc;
+  background-color: #ffffff;
   border-right: 5px solid white;
   border-left: 5px solid white;
   padding:0;

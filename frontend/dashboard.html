@@ -41,28 +41,13 @@
               <a class="navbar-brand" href="http://getbootstrap.com/examples/navbar-fixed-top/#">Parent Dashboard</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="http://getbootstrap.com/examples/navbar-fixed-top/#">Home</a></li>
-                <li><a href="http://getbootstrap.com/examples/navbar-fixed-top/#about">About</a></li>
-                <li><a href="http://getbootstrap.com/examples/navbar-fixed-top/#contact">Contact</a></li>
-                <li class="dropdown">
-                  <a href="http://getbootstrap.com/examples/navbar-fixed-top/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="">Action</a></li>
-                    <li><a href="">Another action</a></li>
-                    <li><a href="">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="">Separated link</a></li>
-                    <li><a href="">One more separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
+
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://getbootstrap.com/examples/navbar/">Default</a></li>
-                <li><a href="http://getbootstrap.com/examples/navbar-static-top/">Static top</a></li>
-                <li class="active"><a href="./Fixed Top Navbar Example for Bootstrap_files/Fixed Top Navbar Example for Bootstrap.html">Fixed top <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="#">Bobby</a></li>
+                <li><a href="#">Joseph</a></li>
+                <li><a href="#">Jerard</a></li>
               </ul>
+
             </div><!--/.nav-collapse -->
           </div>
         </nav>
@@ -147,9 +132,8 @@
             </div>
             <div class="dash col-md-12">
               <div class="container">
-                <div class="in_dash col-md-6">
-                </div>
-                <div class="in_dash col-md-6">
+                <div class="in_dash col-md-12">
+                  <div id="highcharts_holder"></div>
                 </div>
               </div>
             </div>
@@ -215,6 +199,7 @@
       var pusher = new Pusher('c9da65d5b2527ee603e9', {
         encrypted: true
       });
+
       var channel = pusher.subscribe('test_channel');
       channel.bind('my_event', function(data) {
         alert(data.message);
