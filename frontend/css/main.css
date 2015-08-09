@@ -18,7 +18,7 @@ body {
   border: 2px solid #333333;
   background-color: rgba(0, 0, 0, 0);
   background-image:url('');
-  border-radius: 0;
+  border-radius: 500px;
   color: #333333;
   text-shadow: none;
   box-shadow: none;
@@ -128,7 +128,7 @@ body {
   border: 2px solid white;
   background-color: rgba(0, 0, 0, 0);
   background-image:url('');
-  border-radius: 0;
+  border-radius: 500px;
   color: #ffffff;
   text-shadow: none;
 }
@@ -144,4 +144,17 @@ body {
 
 #login_jumbo {
   background-color: #eeeeee;
+}
+
+
+
+
+
+
+
+/* DASHBOARD stuff */
+
+.dash {
+  background-color: #cccccc;
+  height: 50px;
 }
