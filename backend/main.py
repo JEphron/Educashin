@@ -2,18 +2,27 @@ from flask import Flask, request, session, render_template, jsonify, redirect, u
 import rauth
 import requests
 from constants import *
+import khan_api
+import venmo_api
 from twilio_sms import send_text
+from polling import poll_khan
 
 app = Flask(__name__)
 app.debug = True
-app.secret_key = VENMO_APP_SECRET
-venmo_oauth_url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code'
+app.secret_key = VENMO_APP_SECRET  #
+venmo_oauth_url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20' \
+                  'access_profile%20access_email%20access_phone%20access_balance&response_type=code'
+
+if 'khan' in session:
+    poll_khan(session['khan']['oauth_token'])
+
 # catch all
 @app.before_request
 def catch_all():
     print request.endpoint
     if 'venmo' not in session and request.endpoint != 'venmo_callback':
         return redirect(venmo_oauth_url)
+
 
 @app.route('/')
 @app.route('/index.html')
@@ -29,7 +38,7 @@ def venmo_callback():
         "client_secret": VENMO_CONSUMER_SECRET,
         "code": AUTHORIZATION_CODE
     }
-    url = "https://api.venmo.com/v1/oauth/access_token"
+    url = "%s/oauth/access_token" % (VENMO_API_URL,)
     response = requests.post(url, data)
     response_dict = response.json()
     access_token = response_dict.get('access_token')
@@ -49,6 +58,7 @@ def parent_dashboard():
 
     print session.get('child_venmo', '')
     data = {'name': session['venmo']['username'],
+            'venmo_oauth': session.get('venmo', {}).get('oauth_token', ""),
             'khan_token': session.get('khan', {}).get('oauth_token', ""),
             'child_phone': session.get('child_phone', ''),
             'child_venmo': session.get('child_venmo', ''),
@@ -63,45 +73,24 @@ def parent_dashboard():
 def poll_khan():
     token = session.get('khan', {}).get('oauth_token')
 
+
 @app.route('/payout-trigger')
 def payout_trigger():
-
     # do the venmo thing
-    venmo_transfer()
+    venmo_api.transfer(session['venmo']['oauth_token'], session['child_venmo'], 10.0, 'Completed Calculus 1')
     # send the text
+
 
 
 @app.route('/link-khan')
 def link_khan():
-    service = rauth.OAuth1Service(
-        name='test',
-        consumer_key=KHAN_CONSUMER_KEY,
-        consumer_secret=KHAN_CONSUMER_SECRET,
-        request_token_url=KHAN_SERVER_URL + '/api/auth2/request_token',
-        access_token_url=KHAN_SERVER_URL + '/api/auth2/access_token',
-        authorize_url=KHAN_SERVER_URL + '/api/auth2/authorize',
-        base_url=KHAN_SERVER_URL + '/api/auth2')
-
-    cb_url = 'http://%s:%d%s' % (CALLBACK_BASE, 5000, url_for('khan_callback'))
-
-    request_token, secret_request_token = service.get_request_token(
-        params={'oauth_callback': cb_url})
-
-    authorize_url = service.get_authorize_url(request_token)
-
-    return redirect(authorize_url)
-
+    authorize_url = khan_api.start_auth(url_for('khan_callback'))
+    return redirect(authorize_url) # takes you out of the site. Will return in khan_callback
 
 @app.route('/khan-callback')
 def khan_callback():
-    print session['venmo']
-    session['khan'] = {
-        'oauth_token_secret': request.args.get('oauth_token_secret'),
-        'oauth_verifier': request.args.get('oauth_verifier'),
-        'oauth_token': request.args.get('oauth_token')
-    }
+    session['khan'] = khan_api.finalize_auth(request)
     return redirect(url_for('parent_dashboard'))
-
 
 @app.route('/link-child-venmo', methods=['POST'])
 def link_child_venmo():
