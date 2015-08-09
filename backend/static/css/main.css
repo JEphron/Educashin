@@ -100,15 +100,22 @@ body {
 
 
 
+#middle_button {
+  top:50px;
+}
+
+
+
 #top_container {
   height:100vh;
   margin-left:0;
   margin-right:0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), url(../img/shattered.png);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(../img/img6.jpg);
   background-color: #ffffff;
-  background-repeat:repeat;
-  background-attachment: fixed;
-  background-position: center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center;
+  background-size: cover;
   border-top:4px solid #ffffff;
   border-right:4px solid #ffffff;
   border-left:4px solid #ffffff;
@@ -133,6 +140,7 @@ body {
   border-right:4px solid #ffffff;
   border-left:4px solid #ffffff;
   border-bottom:2px solid #ffffff;
+  overflow: hidden;
 }
 
 #leaf_pic {
@@ -171,6 +179,7 @@ body {
   border-right:4px solid #ffffff;
   border-left:4px solid #ffffff;
   border-bottom:2px solid #ffffff;
+  overflow: hidden;
 }
 
 #third_lesson {
@@ -185,6 +194,7 @@ body {
   border-right:4px solid #ffffff;
   border-left:4px solid #ffffff;
   border-bottom:0px solid #ffffff;
+  overflow: hidden;
 }
 
 
@@ -205,11 +215,13 @@ body {
 
 .subtext_logo_div {
   text-align: center;
-  padding:0;
+  padding:0 0 50px 0;
+
 }
 
 .buttons_logo_div {
   text-align: center;
+  text-overflow: hidden;
 }
 
 

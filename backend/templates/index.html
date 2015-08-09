@@ -39,13 +39,13 @@
 
     <div id="titles_holder" class="row">
         <div class="subtext_logo_div col-md-12">
-            <h1 id="subtext_logo"> An education that never expires</h1>
+            <h1>Enable your child to grow through</h1>
         </div>
         <div class="buttons_logo_div col-md-offset-3 col-md-2 col-sm-offset-2 col-sm-3">
             <a class="buttons_logo btn btn-primary btn-lg" href="#first_lesson" role="button">Work Ethics</a>
         </div>
         <div class="buttons_logo_div col-md-2 col-sm-2">
-            <a class="buttons_logo btn btn-primary btn-lg" href="#second_lesson" role="button">Charity</a>
+            <a id="middle_button" class="buttons_logo btn btn-primary btn-lg" href="#second_lesson" role="button">Charity</a>
         </div>
         <div class="buttons_logo_div col-md-2 col-sm-3">
             <a class="buttons_logo btn btn-primary btn-lg" href="#third_lesson" role="button">Responsibility</a>
@@ -83,7 +83,7 @@
 
 <div id="third_lesson" class="row" name="third_lesson">
     <div class="buttons_logo_div col-xs-offset-4 col-xs-4">
-        <img id="responsibility_pic" src="{{ url_for('static', filename='img/comment.svg') }}">
+        <img id="responsibility_pic" src="{{ url_for('static', filename='img/briefcase.svg') }}">
     </div>
     <div class="buttons_logo_div col-xs-offset-4 col-xs-4">
         <p class="lesson_title btn btn-primary btn-lg" href="#" role="button">Responsibility</p>
@@ -101,7 +101,7 @@
         <div class="inside_jumbo">
             <h2>Students,</h2>
 
-            <p>Buy what you always wanted.</p>
+            <p>Start learning</p>
             <a class="btn btn-default" href="{{ data.sign_in }}" role="button">Sign in</a>
         </div>
     </div>
@@ -109,7 +109,7 @@
         <div class="inside_jumbo">
             <h2>Parents,</h2>
 
-            <p>Motivate your child to learn.</p>
+            <p>Motivate your child to learn</p>
             <a class="btn btn-default" href="{{ data.sign_in }}" role="button">Sign in</a>
         </div>
     </div>
