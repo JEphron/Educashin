@@ -1,3 +1,4 @@
+from threading import Timer
 from flask import Flask, request, session, render_template, jsonify, redirect, url_for
 import rauth
 import requests
@@ -10,11 +11,11 @@ from polling import poll_khan
 app = Flask(__name__)
 app.debug = True
 app.secret_key = VENMO_APP_SECRET  #
+khan = khan_api.Khan()
 venmo_oauth_url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20' \
                   'access_profile%20access_email%20access_phone%20access_balance&response_type=code'
 
-if 'khan' in session:
-    poll_khan(session['khan']['oauth_token'])
+
 
 # catch all
 @app.before_request
@@ -56,7 +57,6 @@ def parent_dashboard():
     if 'venmo' not in session:
         return redirect(venmo_oauth_url)
 
-    print session.get('child_venmo', '')
     data = {'name': session['venmo']['username'],
             'venmo_oauth': session.get('venmo', {}).get('oauth_token', ""),
             'khan_token': session.get('khan', {}).get('oauth_token', ""),
@@ -81,16 +81,28 @@ def payout_trigger():
     # send the text
 
 
-
 @app.route('/link-khan')
 def link_khan():
-    authorize_url = khan_api.start_auth(url_for('khan_callback'))
-    return redirect(authorize_url) # takes you out of the site. Will return in khan_callback
+    authorize_url = khan.start_auth(url_for('khan_callback'))
+    return redirect(authorize_url)  # takes you out of the site. Will return in khan_callback
+
 
 @app.route('/khan-callback')
 def khan_callback():
-    session['khan'] = khan_api.finalize_auth(request)
+    session['khan'] = khan.finalize_auth(request)
+
+    def cb(data):
+        print data
+
+    khan.poll_changed_callback = cb
+
+    def run_poll():
+        res = khan.poll(session['khan']['oauth_token'])
+        Timer(2, run_poll).start()
+
+    run_poll()
     return redirect(url_for('parent_dashboard'))
+
 
 @app.route('/link-child-venmo', methods=['POST'])
 def link_child_venmo():
