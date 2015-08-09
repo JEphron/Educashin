@@ -9,20 +9,20 @@ app.debug = True
 app.secret_key = VENMO_APP_SECRET
 venmo_oauth_url = 'https://api.venmo.com/v1/oauth/authorize?client_id=2844&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code'
 # catch all
-# @app.before_request
-# def catch_all():
-#     pass
+@app.before_request
+def catch_all():
+    print request.endpoint
+    if 'venmo' not in session and request.endpoint != 'venmo_callback':
+        return redirect(venmo_oauth_url)
 
 @app.route('/')
 @app.route('/index.html')
 def index():
-    if 'venmo' not in session:
-        return redirect(venmo_oauth_url)
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('parent_dashboard'))
 
 
 @app.route('/venmo-callback')
-def oauth_authorized():
+def venmo_callback():
     AUTHORIZATION_CODE = request.args.get('code')
     data = {
         "client_id": VENMO_CONSUMER_ID,
@@ -39,11 +39,11 @@ def oauth_authorized():
         'username': user['username'],
     }
 
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('parent_dashboard'))
 
 
-@app.route('/dashboard')
-def dashboard():
+@app.route('/parent/dashboard')
+def parent_dashboard():
     if 'venmo' not in session:
         return redirect(venmo_oauth_url)
 
@@ -100,14 +100,14 @@ def khan_callback():
         'oauth_verifier': request.args.get('oauth_verifier'),
         'oauth_token': request.args.get('oauth_token')
     }
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('parent_dashboard'))
 
 
 @app.route('/link-child-venmo', methods=['POST'])
 def link_child_venmo():
     session['child_venmo'] = request.form['venmo_id']
     session['child_phone'] = request.form['phone_num']
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('parent_dashboard'))
 
 
 @app.route('/logout')
