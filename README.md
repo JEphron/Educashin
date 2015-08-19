@@ -1,4 +1,4 @@
-<img src="backend/static/img/educashin.png" alt="Educashin" style="width:10px;"/>
+<img src="backend/static/img/educashin.png" alt="Educashin" width="10px"/>
 ====
 for Battlehack New York 2015
 Developed by Jordan Ephron, Vasily Rudchenko, and Anthony Lobko
