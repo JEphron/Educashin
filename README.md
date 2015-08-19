@@ -11,4 +11,4 @@ The code is developed on [Flask](http://flask.pocoo.org/) with [Bootstrap](http:
 The app can be accessed by running ```python backend/main.py``` in the root directory of the project folder.
 
 <h2>File Organization</h2>
-Backend functionality is separated from fronetend for development purposes and API implementation.
+Backend functionality is separated from fronetend for development purposes and API implementation; however, later merged into same folder titled "backend."
